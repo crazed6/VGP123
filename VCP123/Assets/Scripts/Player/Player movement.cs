@@ -29,7 +29,7 @@ public class Playermovement : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
 
-        if(speed <= 0 )
+        if (speed <= 0 )
         {
             speed = 5;
             Debug.Log("Speed was set to a value less than 0");
@@ -56,16 +56,37 @@ public class Playermovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        IsGrounded();
-   
+        AnimatorClipInfo[] curPlayingClips = anim.GetCurrentAnimatorClipInfo(0);
+        
         //grab horizontal axis - Check project settings > Input manager to see the inputs defined
         float hInput = Input.GetAxis("Horizontal");
 
-        rb.velocity = new Vector2(hInput * speed, rb.velocity.y);
+        IsGrounded();
+
+        if (curPlayingClips.Length > 0)
+        {
+            if (curPlayingClips[0].clip.name == "Attack")
+            {
+                if (isGrounded)
+                    rb.velocity = Vector2.zero;
+            }
+            else
+            {
+                rb.velocity = new Vector2(hInput * speed, rb.velocity.y);
+            }
+        
+        }
+
+
 
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        }
+
+        if (Input.GetButtonDown("Fire2") && !curPlayingClips[0].clip.name.Contains("Attack"))
+        {
+            anim.SetTrigger("Fire");
         }
 
         if (Input.GetButtonDown("Fire1") && isGrounded)
@@ -86,12 +107,29 @@ public class Playermovement : MonoBehaviour
     }
     void IsGrounded()
     {
-        if (rb.velocity.y <= 0)
+        if (!isGrounded)
         {
-            isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, isGroundLayer);
+            if (rb.velocity.y <= 0)
+            {
+                isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, isGroundLayer);
+            }
         }
-
         else
             isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, isGroundLayer);
     }
+
+    void IncreaseGravity()
+    {
+
+        rb.gravityScale = 10;
+
+    }
+
+
+
+
+
+
+
+
 }
