@@ -4,11 +4,36 @@ using UnityEngine;
 
 public class pickups : MonoBehaviour
 {
+    public int pickupID;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public enum PickupType
     {
-        if (collision.tag == "Player")
+        Life,
+        PowerupJump,
+        PowerupSpeed,
+        Score
+    }
+
+    [SerializeField] private PickupType type;
+
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.CompareTag("Player"))
         {
+            Playermovement pc = collider.GetComponent<Playermovement>();
+
+            switch (type)
+            {
+                case PickupType.Life:
+                    pc.lives++;
+                    break;
+                case PickupType.PowerupJump:
+                case PickupType.PowerupSpeed:
+                    pc.PowerupValueChange(type);
+                    break;
+                case PickupType.Score:
+                    break;
+            }
             Destroy(gameObject);
         }
 
