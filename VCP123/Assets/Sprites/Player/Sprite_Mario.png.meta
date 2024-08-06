@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Sprite_Mario_0
+      name: Player
       rect:
         serializedVersion: 2
         x: 3
@@ -1407,7 +1407,7 @@ TextureImporter:
       Fire_1: 499718076
       Fire_2: -1144393994
       Fire_3: 1437689039
-      Sprite_Mario_0: -680043443
+      Player: -680043443
       Sprite_Mario_1: -1707520369
       Sprite_Mario_10: -1792738205
       Sprite_Mario_11: 269223885

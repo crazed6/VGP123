@@ -5,10 +5,8 @@ using UnityEngine;
 public class JumpAttackBehavor : MonoBehaviour
 {
 
-     public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animator.gameObject.GetComponent<Rigidbody2D>().gravityScale = 1;
     }
-
-
 }

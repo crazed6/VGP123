@@ -31,7 +31,7 @@ public class Shoot : MonoBehaviour
 
     public void Fire()
     {
-        if (sr.flipX)
+        if (!sr.flipX)
         {
             Projectile curprojectile = Instantiate(projectilePrefab, spawnPointLeft.position, Quaternion.identity);
             curprojectile.SetVelocity(xVel, yVel);
