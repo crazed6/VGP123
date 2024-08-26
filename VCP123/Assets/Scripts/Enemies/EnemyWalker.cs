@@ -6,7 +6,6 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class EnemyWalker : Enemy
 {
-
     Rigidbody2D rb;
     [SerializeField] private float xVel;
 
@@ -23,18 +22,16 @@ public class EnemyWalker : Enemy
 
     public override void TakeDamage(int damage)
     {
+        //do something to trigger our squash animation
         if (damage == 9999)
         {
             anim.SetTrigger("Squish");
+            Destroy(transform.parent.gameObject, 2);
             return;
         }
-        
-            
+
         base.TakeDamage(damage);
     }
-
-
-
 
     // Update is called once per frame
     void Update()
@@ -43,11 +40,7 @@ public class EnemyWalker : Enemy
 
         if (curPlayingClips[0].clip.name.Contains("Walk"))
         {
-            Vector2 velocity;
-            if (sr.flipX) 
-                velocity = new Vector2(-xVel, rb.velocity.y);
-            
-            else velocity = new Vector2(xVel, rb.velocity.y);
+            rb.velocity = (sr.flipX) ? new Vector2(-xVel, rb.velocity.y) : new Vector2(xVel, rb.velocity.y);
         }
     }
 
@@ -55,9 +48,9 @@ public class EnemyWalker : Enemy
     {
         if (collision.CompareTag("Barrier"))
         {
-            anim.SetTrigger("Turn");
-            sr.flipX= !sr.flipX;
+            anim.SetTrigger("Barrier");
+            sr.flipX = !sr.flipX;
         }
     }
-}
 
+}

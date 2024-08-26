@@ -4499,7 +4499,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sprite_Enemies_209
+      name: EnemyFireball
       rect:
         serializedVersion: 2
         x: 597
@@ -14547,6 +14547,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      EnemyFireball: 152312556
       Fireball: -1509963693
       Sprite_Enemies_0: -382427259
       Sprite_Enemies_1: -955070064
@@ -14671,7 +14672,6 @@ TextureImporter:
       Sprite_Enemies_206: -733542778
       Sprite_Enemies_207: -583377048
       Sprite_Enemies_208: 639284477
-      Sprite_Enemies_209: 152312556
       Sprite_Enemies_21: 127178288
       Sprite_Enemies_210: -1088691615
       Sprite_Enemies_211: 1083635647
