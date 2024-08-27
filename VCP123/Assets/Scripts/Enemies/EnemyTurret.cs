@@ -31,5 +31,13 @@ public class EnemyTurret : Enemy
                 timeSinceLastFire = Time.time;
             }
         }
+        if (GameObject.Find("Player").transform.position.x < GameObject.Find("EnemyTurret").transform.position.x)
+        {
+            sr.flipX = true;
+        }
+        else
+        {
+            sr.flipX = false;
+        }
     }
 }

@@ -25,13 +25,20 @@ public class Projectile : MonoBehaviour
     {
        if (collision.gameObject.CompareTag ("wall"))
             Destroy(gameObject);
+       
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            collision.gameObject.GetComponent<Enemy>().TakeDamage(10);
+            Destroy(gameObject);
+        }
     }
-
-
-
-
-
-
 }
+
+
+
+
+
+
+
 
 
