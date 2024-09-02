@@ -8,6 +8,8 @@ TagManager:
   - Squish
   - Barrier
   - Enemy
+  - Fireball
+  - EnemyFireball
   layers:
   - Default
   - TransparentFX

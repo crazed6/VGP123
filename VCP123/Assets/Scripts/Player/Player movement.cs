@@ -11,7 +11,6 @@ public class Playermovement : MonoBehaviour
 {
     private Coroutine jumpForceChange;
     private Coroutine speedChange;
-    private int maxLives;
 
     public void PowerupValueChange(pickups.PickupType type)
     {
@@ -60,47 +59,6 @@ public class Playermovement : MonoBehaviour
 
         Debug.Log($"Jump force value is {jumpForce}, Speed value is {speed}");
     }
-
-    //Private Lives Variable
-    private int _lives = 10;
-
-    //public variable for getting and setting lives
-    public int lives
-    {
-        get
-        {
-            return _lives;
-        }
-        set
-        {
-            //all lives lost (zero counts as a life due to the check)
-            if (value < 0)
-            {
-                //game over function called here
-                //return to prevent the rest of the function to be called
-                return;
-            }
-
-            //lost a life
-            if (value < _lives)
-            {
-                //Respawn function called here
-            }
-
-            //cannot roll over max lives
-            if (value > maxLives)
-            {
-                value = maxLives;
-            }
-
-            _lives = value;
-
-            Debug.Log($"Lives value on {gameObject.name} has changed to {lives}");
-        }
-    }
-
-
-    [SerializeField] private int _maxLives = 10;
 
     [SerializeField, Range(1, 20)] private float speed = 5;
     [SerializeField, Range(1, 20)] private float jumpForce = 10;
@@ -218,6 +176,15 @@ public class Playermovement : MonoBehaviour
         rb.gravityScale = 10;
 
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            GameManager.Instance.lives--;
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Squish"))

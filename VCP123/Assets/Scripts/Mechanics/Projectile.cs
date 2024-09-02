@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,17 +24,23 @@ public class Projectile : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-       if (collision.gameObject.CompareTag ("wall"))
+        if (collision.gameObject.CompareTag("all"))
             Destroy(gameObject);
-       
-        if (collision.gameObject.CompareTag("Enemy"))
+
+        if (collision.gameObject.CompareTag("Enemy") && CompareTag("Fireball"))
         {
             collision.gameObject.GetComponent<Enemy>().TakeDamage(10);
             Destroy(gameObject);
         }
-    }
-}
 
+        if (collision.gameObject.CompareTag("Player") && CompareTag("EnemyFireball"))
+        {
+            GameManager.Instance.lives--;
+            Destroy(gameObject);
+        }
+    }
+
+}
 
 
 

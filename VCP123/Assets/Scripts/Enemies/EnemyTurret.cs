@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyTurret : Enemy
 {
-
+    [SerializeField] private float distThreshold;
     [SerializeField] private float projectileFireRate;
 
     private float timeSinceLastFire = 0;
@@ -16,28 +16,36 @@ public class EnemyTurret : Enemy
 
         if (projectileFireRate <= 0)
             projectileFireRate = 2;
+
+        if (distThreshold <= 0)
+            distThreshold = 2;
     }
 
     // Update is called once per frame
     void Update()
     {
+        Playermovement pc = GameManager.Instance.PlayerInstance;
         AnimatorClipInfo[] curPlayingClips = anim.GetCurrentAnimatorClipInfo(0);
 
-        if (curPlayingClips[0].clip.name.Contains("Idle"))
+        sr.flipX = (pc.transform.position.x < transform.position.x) ? true : false;
+
+        float distance = Vector2.Distance(pc.transform.position, transform.position);
+
+        if (distance < distThreshold)
         {
-            if (Time.time >= timeSinceLastFire + projectileFireRate)
+            sr.color = Color.red;
+            if (curPlayingClips[0].clip.name.Contains("Idle"))
             {
-                anim.SetTrigger("Fire");
-                timeSinceLastFire = Time.time;
+                if (Time.time >= timeSinceLastFire + projectileFireRate)
+                {
+                    anim.SetTrigger("Fire");
+                    timeSinceLastFire = Time.time;
+                }
             }
-        }
-        if (GameObject.Find("Player").transform.position.x < GameObject.Find("EnemyTurret").transform.position.x)
-        {
-            sr.flipX = true;
         }
         else
         {
-            sr.flipX = false;
+            sr.color = Color.white;
         }
     }
 }
