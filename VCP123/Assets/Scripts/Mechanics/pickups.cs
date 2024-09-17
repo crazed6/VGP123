@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource), typeof(SpriteRenderer))]
 public class pickups : MonoBehaviour
 {
     public int pickupID;
@@ -16,10 +17,18 @@ public class pickups : MonoBehaviour
 
     [SerializeField] private PickupType type;
 
+    public AudioClip pickupsound;
+
+    SpriteRenderer sr;
+    AudioSource aud;
+
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.CompareTag("Player"))
         {
+            Collider2D myCollider = GetComponent<Collider2D>();
+            Physics2D.IgnoreCollision(myCollider, collider);
+
             switch (type)
             {
                 case PickupType.Life:
@@ -33,6 +42,8 @@ public class pickups : MonoBehaviour
                 case PickupType.Score:
                     break;
             }
+            sr.enabled = false;
+            aud.PlayOneShot
             Destroy(gameObject);
         }
 

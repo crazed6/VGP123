@@ -5,6 +5,7 @@ using UnityEngine;
 public class Shoot : MonoBehaviour
 {
     SpriteRenderer sr;
+    AudioSource aud;
 
     [Range(0, 10)]
     public float xVel;
@@ -15,6 +16,8 @@ public class Shoot : MonoBehaviour
     public Transform spawnPointRight;
 
     public Projectile projectilePrefab;
+
+    public AudioClip firesound;
 
     // Start is called before the first frame update
     void Start()
@@ -41,5 +44,6 @@ public class Shoot : MonoBehaviour
             Projectile curProjectile = Instantiate(projectilePrefab, spawnPointRight.position, Quaternion.identity);
             curProjectile.SetVelocity(-xVel, yVel);
         }
+        if (firesound 
     }
 }

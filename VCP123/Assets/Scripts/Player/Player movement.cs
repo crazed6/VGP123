@@ -7,6 +7,7 @@ using UnityEngine;
 
 
 [RequireComponent(typeof(Rigidbody2D), typeof(SpriteRenderer), typeof(Animator))]
+[RequireComponent(typeof(AudioSource))]
 public class Playermovement : MonoBehaviour
 {
     private Coroutine jumpForceChange;
@@ -72,6 +73,12 @@ public class Playermovement : MonoBehaviour
     Rigidbody2D rb;
     SpriteRenderer sr;
     Animator anim;
+    AudioSource aud;
+
+    [SerializeField] private AudioClip jumpClip;
+    [SerializeField] private AudioClip stompClip;
+
+
 
     // Start is called before the first frame update
     void Start()

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[RequireComponent(typeof(SpriteRenderer), typeof(Animator))]
+[RequireComponent(typeof(SpriteRenderer), typeof(Animator), typeof(AudioSource))]
 public abstract class Enemy : MonoBehaviour
 {
     //private - private to the class that has created it. It is only a property of the class and nothing else can access it.
